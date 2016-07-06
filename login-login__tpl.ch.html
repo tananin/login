@@ -1,0 +1,31 @@
+[[-
+Шаблон входа на сайт
+login-login__tpl
+<
+<div class="loginForm">
+    <div class="loginMessage">[[+errors]]</div>
+    <div class="loginLogin">
+        <form class="loginLoginForm" action="[[~[[*id]]]]" method="post">
+
+            <legend class="loginLegend">[[+actionMsg]]</legend>
+            <label class="loginUsernameLabel">
+                <input class="loginUsername" type="text" name="username" placeholder="[[%login.username]]"/>
+            </label>
+
+            <label class="loginPasswordLabel">
+                <input class="loginPassword" type="password" name="password" placeholder="[[%login.password]]"/>
+            </label>
+            <input class="returnUrl" type="hidden" name="returnUrl" value="[[+request_uri]]" />
+
+            [[+login.recaptcha_html]]
+
+            <input class="loginLoginValue" type="hidden" name="service" value="login" />
+            <span class="loginLoginButton"><input type="submit" name="Login" value="[[+actionMsg]]" /></span>
+
+        </form>
+    </div>
+</div>
+
+]]
+
+<a href="[[~2818]]">Вход для партнёров</a>

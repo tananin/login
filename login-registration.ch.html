@@ -1,0 +1,177 @@
+[[-
+Форма регистрации на сайте
+[[!$login-registration]]
+
+&submitVar=`registerbtn`                            имя кнопки, при нажатии которой форма отправится на сервер.
+&activationEmailTpl=`login-email__activate`         чанк содержит письмо с информацией, которое отправится пользователю. По умолчанию lgnActivateEmailTpl.
+&activationEmailSubject=`Спасибо за регистрацию!`   тема письма.
+&usergroups=`Users::Member`                         в какую группу и с какими правами определяем пользователя.
+&submittedResourceId=`4`                            ID ресурса с приветствием, сюда попадаем после нажатия кнопки «Зарегистрироваться». Если в параметрах указать &successMsg=`здесь сообщение...`, то эта страница не нужна.
+&activationResourceId=`5`                           ID ресурса, ожидающий визита по ссылке из письма.
+
+
+[[+error.message]]
+action="[[~[[*id]]]]" method="post"
+<input type="hidden" name="nospam:blank" value="" />
+
+[[%register.username? &namespace=`login` &topic=`register`]]
+name="username:required:minLength=3"
+value="[[+username]]"
+[[+error.username]]
+
+
+[[%register.fullname]]
+name="fullname"
+value="[[+fullname]]"
+[[+error.fullname]]
+
+[[%register.password]]
+name="password:required:minLength=6"
+value="[[+password]]
+[[+error.password]]
+
+[[%register.password_confirm]]
+name="password_confirm:password_confirm=`password`"
+value="[[+password_confirm]]"
+[[+error.password_confirm]]
+
+[[%register.email]]
+name="email:email"
+value="[[+email]]"
+[[+error.email]]
+
+
+name="registerbtn"
+]]
+
+
+
+[[!Register?
+    &submitVar=`registerbtn`
+    &activationEmailTpl=`login-email__activate`
+    &activationEmailSubject=`Спасибо за регистрацию!`
+    &usergroups=`Users::Member`
+    &submittedResourceId=`40`
+    &activationResourceId=`41`
+   
+    &placeholderPrefix=`reg.`
+]]
+
+
+<form class="form-horizontal" action="[[~[[*id]]]]" method="post">
+    <fieldset>
+
+        <!-- Form Name -->
+        <legend>Заполните поля для регистрации:</legend>
+        <div class="registerMessage">[[+reg.error.message]]</div>
+
+        <input type="hidden" name="nospam:blank" value="[[!+reg.nospam]]" />
+
+        <!-- div>Поля, отмеченные (<span class="zvezda">*</span>) - обязательны к заполнению!</div -->
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput">Ваш логин<span class="zvezda">*</span>:</label>
+            <div class="col-md-8">
+                <input id="textinput" name="username:required" value="[[!+reg.username]]" type="text" placeholder="логин" class="form-control input-md" required>
+            </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput">Ваше Ф.И.О.<span class="zvezda">*</span></label>
+            <div class="col-md-8">
+                <input id="textinput" name="fullname" value="[[!+reg.fullname]]" type="text" placeholder="Фамилия Имя Отчество" class="form-control input-md" required>
+            </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="sds">Email<span class="zvezda">*</span>:</label>
+            <div class="col-md-8">
+                <input id="sds" name="email:email" value="[[!+reg.email]]" type="text" placeholder="user@mail.ru" class="form-control input-md" required>
+            </div>
+        </div>
+
+        <!-- Prepended text-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="prependedtext">Телефон<span class="zvezda">*</span>:</label>
+            <div class="col-md-8">
+                <div class="input-group">
+                    <span class="input-group-addon">+7</span>
+                    <input id="prependedtext" name="phone" value="[[!+reg.phone]]" class="form-control" placeholder="999-123-45-67" type="text"  required>
+                </div>
+                <p class="help-block">10 цифр</p>
+            </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput">Город</label>
+            <div class="col-md-8">
+                <input id="textinput" name="city" value="[[!+reg.city]]" type="text" placeholder="Укажите Ваш город" class="form-control input-md">
+                <span class="help-block">Москва</span>
+            </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput">Адрес:</label>
+            <div class="col-md-8">
+                <input id="textinput" name="address" value="[[!+reg.address]]" type="text" placeholder="ул. Ленина, дом 64, кв.34" class="form-control input-md">
+
+            </div>
+        </div>
+
+        <!-- Password input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="passwordinput">Пароль<span class="zvezda">*</span></label>
+            <div class="col-md-8">
+                <input id="passwordinput" name="password:required:minLength=6" type="password" placeholder="" class="form-control input-md"  required>
+
+            </div>
+        </div>
+
+        <!-- Password input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="passwordinput">Повторите пароль<span class="zvezda">*</span></label>
+            <div class="col-md-8">
+                <input id="passwordinput" name="password_confirm:password_confirm=`password`" type="password" placeholder="" class="form-control input-md"  required>
+
+            </div>
+        </div>
+
+        <!-- Textarea -->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="textarea">Доп. информация</label>
+            <div class="col-md-8">
+                <textarea class="form-control" id="textarea" name="comment">[[!+reg.comment]]</textarea>
+            </div>
+        </div>
+
+        <!-- Multiple Checkboxes -->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="checkboxes">Новости</label>
+            <div class="col-md-8">
+                <div class="checkbox">
+                    <label for="checkboxes-0">
+                        <input type="checkbox" name="rassilka" id="checkboxes-0" value="1" checked>
+                        Получать информацию о новых спецпредложениях
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Button -->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="singlebutton"></label>
+            <div class="col-md-8">
+                <input type="submit" name="registerbtn" class="btn btn-primary" value="РЕГИСТРАЦИЯ" />
+
+                
+            </div>
+        </div>
+
+    </fieldset>
+</form>
+
+

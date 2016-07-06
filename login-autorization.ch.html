@@ -1,0 +1,99 @@
+[[-
+Страница авторизации
+[[!$login-autorization]]
+
+&loginTpl=`embedded`            указываем, что форма встроена в страницу. По умолчанию — чанк lgnLoginTpl.
+&errTpl=`lgnErrTpl`             сообщения о ошибках.
+&loginResourceId=`11`           после авторизации отправляемся на страницу настроек профиля.
+&loginMsg=`ВОЙТИ`               надпись на кнопке будет такой.
+
+<div class="loginMessage">[[+errors]]</div>
+<form class="form-horizontal" action="[[~[[*id]]]]" method="post">
+    <fieldset>
+        <!-- Form Name -->
+        <legend>Вход на сайт:</legend>
+
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="usernameLogin">Имя</label>
+            <div class="col-md-8">
+                <input id="usernameLogin" name="username" type="text" placeholder="Укажите ваше имя" class="form-control input-md" required>
+                <span class="help-block has-error">[[+error.username]]</span>
+            </div>
+        </div>
+        <!-- Password input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="loginPasswordLabel">Пароль</label>
+            <div class="col-md-8">
+                <input id="loginPasswordLabel" name="password" type="password" placeholder="Ваш пароль" class="form-control input-md"  required>
+                <span class="help-block">[[+error.password]]</span>
+            </div>
+        </div>
+        <input class="returnUrl" type="hidden" name="returnUrl" value="[[+request_uri]]" />
+        <input class="loginLoginValue" type="hidden" name="service" value="login" />
+
+        <!-- Button -->
+        <div class="form-group">
+            <label class="col-md-1 control-label" for="singlebutton"></label>
+            <div class="col-md-8">
+                <button id="singlebutton" class="btn btn-primary" type="submit" name="Login">[[+actionMsg]]</button>
+            </div>
+        </div>
+
+    </fieldset>
+</form>
+]]
+
+<!-- Если user авторизован показываем сообщение, иначе показываем форму -->
+[[!+modx.user.id:isloggedin:is=`1`:then=`<p>Вы уже авторизованы на сайте <strong>[[++site_name]]</strong>.</p>[[$login-logout]]`:else=`
+
+[[!Login?
+&loginTpl=`embedded`
+&errTpl=`lgnErrTpl`
+&loginResourceId=`46`
+&loginMsg=`ВОЙТИ`
+]]
+
+
+<form class="form-horizontal" action="[[~[[*id]]]]" method="post">
+    <fieldset>
+
+        <!-- Form Name -->
+        <legend>Войдите или зарегистрируйтесь на сайте</legend>
+
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="name">Логин</label>
+            <div class="col-md-4">
+                <input id="name" name="username" type="text" placeholder="Ваше имя" class="form-control input-md">
+                <span class="help-block"></span>
+            </div>
+        </div>
+
+        <!-- Password input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="passwordinput">Пароль</label>
+            <div class="col-md-4">
+                <input id="passwordinput" name="password" type="password" placeholder="" class="form-control input-md">
+                <span class="help-block"></span>
+            </div>
+        </div>
+
+        <!-- Button (Double) -->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="button1id"></label>
+            <div class="col-md-8">
+                <button id="button1id" name="Login"  class="btn btn-success">Вход</button>
+                <a href="[[~39]]" id="button2id" name="button2id" class="btn btn-danger ">Регистрация</a>
+
+                <input class="returnUrl" type="hidden" name="returnUrl" value="[[+request_uri]]" />
+                <input class="loginLoginValue" type="hidden" name="service" value="login" />
+            </div>
+        </div>
+
+    </fieldset>
+</form>
+
+
+`]]
+
